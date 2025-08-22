@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mines - Jogo da Aposta</title>
+    <style>
+        :root {
+            --primary-color: #2e2e4a;
+            --secondary-color: #1a1a2e;
+            --cell-closed: #4a4a6e;
+            --cell-hover: #6a6ab0;
+            --diamond-color: #00cc66;
+            --bomb-color: #ff3333;
+            --text-color: #fff;
+            --button-color: #00cc66;
+            --button-hover: #009944;
+            --sidebar-width: 300px;
+            --border-color: #5a5a7a;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 30px;
+            background-color: var(--primary-color);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--border-color);
+        }
+
+        .controls-panel {
+            width: var(--sidebar-width);
+            background-color: #3b3b5b;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-group label {
+            font-size: 1em;
+            font-weight: 500;
+            color: #ccc;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .display-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            padding: 10px;
+            background-color: #2e2e4a;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        #bet-amount {
+            padding: 12px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: 2px solid var(--cell-closed);
+            background-color: #4a4a6e;
+            color: var(--text-color);
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .quick-bets {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .quick-bet-btn {
+            background-color: #6a6ab0;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-bet-btn:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        .action-button {
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: var(--button-color);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            width: 100%;
+        }
+
+        .action-button:hover:not(:disabled) {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        .action-button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        #cashout-button {
+            background-color: #3498db;
+        }
+
+        #cashout-button:hover:not(:disabled) {
+            background-color: #2980b9;
+        }
+
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-area h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 70px);
+            grid-template-rows: repeat(5, 70px);
+            gap: 10px;
+        }
+
+        .cell {
+            width: 70px;
+            height: 70px;
+            background-color: var(--cell-closed);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .cell:hover:not(.revealed) {
+            transform: scale(1.05);
+            background-color: var(--cell-hover);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cell.revealed {
+            cursor: default;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            transform: scale(1);
+        }
+
+        .cell.diamond {
+            background-color: var(--diamond-color);
+        }
+
+        .cell.bomb {
+            background-color: var(--bomb-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="controls-panel">
+            <div class="control-group">
+                <label>Saldo</label>
+                <div class="display-value" id="balance-display">$1000.00</div>
+            </div>
+
+            <div class="control-group">
+                <label>Valor da Aposta</label>
+                <input type="number" id="bet-amount" value="10.00" min="1.00" step="1.00">
+            </div>
+
+            <div class="quick-bets">
+                <button class="quick-bet-btn" data-value="1">$1</button>
+                <button class="quick-bet-btn" data-value="5">$5</button>
+                <button class="quick-bet-btn" data-value="10">$10</button>
+                <button class="quick-bet-btn" data-value="50">$50</button>
+                <button class="quick-bet-btn" data-action="half">Metade</button>
+                <button class="quick-bet-btn" data-action="all">Tudo</button>
+            </div>
+
+            <button id="start-button" class="action-button">Apostar e Jogar</button>
+            <button id="cashout-button" class="action-button" style="display: none;">Sacar Ganhos</button>
+
+            <div class="control-group">
+                <label>Ganhos Atuais</label>
+                <div class="display-value" id="current-winnings-display">$0.00</div>
+            </div>
+
+            <div class="control-group">
+                <label>Próximo Multiplicador</label>
+                <div class="display-value" id="next-multiplier-display">1.10x</div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <h1>Mines</h1>
+            <div class="board" id="board"></div>
+        </div>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const balanceDisplay = document.getElementById('balance-display');
+        const betAmountInput = document.getElementById('bet-amount');
+        const startButton = document.getElementById('start-button');
+        const currentWinningsDisplay = document.getElementById('current-winnings-display');
+        const cashoutButton = document.getElementById('cashout-button');
+        const nextMultiplierDisplay = document.getElementById('next-multiplier-display');
+        const quickBetBtns = document.querySelectorAll('.quick-bet-btn');
+
+        const gridSize = 25;
+        const bombCount = 3;
+        let balance = 1000.00;
+        let currentBet = 0;
+        let currentWinnings = 0;
+        let bombs = [];
+        let gameActive = false;
+        let diamondsFound = 0;
+
+        const multipliers = {
+            1: 1.10, 2: 1.30, 3: 1.60, 4: 2.00, 5: 2.50,
+            6: 3.20, 7: 4.00, 8: 5.00, 9: 6.50, 10: 8.00,
+            11: 10.00, 12: 12.50, 13: 15.00, 14: 18.00,
+            15: 22.00, 16: 27.00, 17: 33.00, 18: 40.00,
+            19: 50.00, 20: 60.00, 21: 75.00, 22: 90.00
+        };
+
+        function updateUI() {
+            balanceDisplay.textContent = `$${balance.toFixed(2)}`;
+            currentWinningsDisplay.textContent = `$${currentWinnings.toFixed(2)}`;
+            const nextMultiplier = multipliers[diamondsFound + 1] || 0;
+            nextMultiplierDisplay.textContent = nextMultiplier > 0 ? `${nextMultiplier.toFixed(2)}x` : 'Fim';
+        }
+
+        function startRound() {
+            const betAmount = parseFloat(betAmountInput.value);
+            if (betAmount < 1 || betAmount > balance || isNaN(betAmount)) {
+                alert('Valor de aposta inválido. Por favor, insira um valor entre $1.00 e seu saldo.');
+                return;
+            }
+
+            balance -= betAmount;
+            currentBet = betAmount;
+            currentWinnings = currentBet;
+            diamondsFound = 0;
+            gameActive = true;
+            startButton.style.display = 'none';
+            betAmountInput.disabled = true;
+            cashoutButton.style.display = 'block';
+
+            bombs = [];
+            board.innerHTML = '';
+            placeBombs();
+            createBoard();
+            updateUI();
+        }
+
+        function cashOut() {
+            if (!gameActive) return;
+            balance += currentWinnings;
+            gameActive = false;
+            alert(`Você sacou seus ganhos! Diamantes: ${diamondsFound}. Total: $${currentWinnings.toFixed(2)}`);
+            resetRoundUI();
+        }
+
+        function resetRoundUI() {
+            startButton.style.display = 'block';
+            betAmountInput.disabled = false;
+            cashoutButton.style.display = 'none';
+            currentBet = 0;
+            currentWinnings = 0;
+            showAllBombs();
+            updateUI();
+        }
+
+        function placeBombs() {
+            let positions = Array.from({ length: gridSize }, (_, i) => i);
+            for (let i = 0; i < bombCount; i++) {
+                const randomIndex = Math.floor(Math.random() * positions.length);
+                bombs.push(positions[randomIndex]);
+                positions.splice(randomIndex, 1);
+            }
+        }
+
+        function createBoard() {
+            for (let i = 0; i < gridSize; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.index = i;
+                cell.addEventListener('click', handleCellClick);
+                board.appendChild(cell);
+            }
+        }
+
+        function handleCellClick(event) {
+            if (!gameActive) return;
+            const cell = event.target;
+            const index = parseInt(cell.dataset.index);
+
+            if (cell.classList.contains('revealed')) return;
+            cell.classList.add('revealed');
+
+            if (bombs.includes(index)) {
+                cell.classList.add('bomb');
+                cell.textContent = '💣';
+                gameActive = false;
+                setTimeout(() => {
+                    alert(`BOOOM! Você perdeu $${currentBet.toFixed(2)}. Saldo: $${balance.toFixed(2)}`);
+                    resetRoundUI();
+                }, 300);
+            } else {
+                cell.classList.add('diamond');
+                cell.textContent = '💎';
+                diamondsFound++;
+                currentWinnings = currentBet * (multipliers[diamondsFound] || 1);
+                updateUI();
+                if (diamondsFound === gridSize - bombCount) cashOut();
+            }
+        }
+
+        function showAllBombs() {
+            const cells = document.querySelectorAll('.cell');
+            bombs.forEach(index => {
+                const cell = cells[index];
+                if (!cell.classList.contains('bomb')) {
+                    cell.classList.add('bomb');
+                    cell.textContent = '💣';
+                }
+            });
+        }
+
+        quickBetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.value) {
+                    betAmountInput.value = parseFloat(btn.dataset.value).toFixed(2);
+                } else if (btn.dataset.action === 'half') {
+                    betAmountInput.value = (balance / 2).toFixed(2);
+                } else if (btn.dataset.action === 'all') {
+                    betAmountInput.value = balance.toFixed(2);
+                }
+            });
+        });
+
+        startButton.addEventListener('click', startRound);
+        cashoutButton.addEventListener('click', cashOut);
+        updateUI();
+        createBoard();
+    </script>
+</body>
+</html>

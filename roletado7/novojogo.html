@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎰 Slot Machine Animado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: rgba(28, 31, 38, 0.9);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 420px;
+            border: 2px solid #ffcc00;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            perspective: 500px;
+        }
+
+        .slot-column {
+            background-color: #2c313a;
+            padding: 10px;
+            margin: 0 8px;
+            border-radius: 15px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .slot-column .symbol {
+            transition: transform 0.1s linear;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls select,
+        .controls button {
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1em;
+        }
+        
+        .controls select {
+            background-color: #2c313a;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        button#jogarBtn {
+            background-color: #ffcc00;
+            color: #1a1a2e;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        button#jogarBtn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.6);
+        }
+
+        .saldo {
+            margin-top: 25px;
+            font-size: 1.5em;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animação para a rolagem */
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-300%); }
+        }
+
+        .spinning {
+            animation: spin 1s cubic-bezier(0.6, 0.1, 0.4, 1.5);
+            animation-iteration-count: 3; /* Rolagem por 3 vezes */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎰 Slot Machine Animado</h1>
+        <div class="slot">
+            <div id="slot1" class="slot-column">
+                <span class="symbol">❔</span>
+            </div>
+            <div id="slot2" class="slot-column">
+                <span class="symbol">❔</span>
+            </div>
+            <div id="slot3" class="slot-column">
+                <span class="symbol">❔</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <select id="aposta">
+                <option value="fixo10">R$10</option>
+                <option value="fixo20">R$20</option>
+                <option value="fixo50">R$50</option>
+                <option value="metade">Metade do saldo</option>
+                <option value="tudo">Apostar tudo</option>
+            </select>
+            <button id="jogarBtn" onclick="jogar()">🎲 Jogar</button>
+        </div>
+
+        <div class="saldo">💰 Saldo: R$ <span id="saldo">100</span></div>
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        const simbolos = ["🍒", "🍋", "🍉", "⭐", "🔔", "💎"];
+        let saldo = 100;
+        const slots = [
+            document.querySelector('#slot1 .symbol'),
+            document.querySelector('#slot2 .symbol'),
+            document.querySelector('#slot3 .symbol')
+        ];
+        const resultadoDiv = document.getElementById("resultado");
+        const apostaSelect = document.getElementById("aposta");
+        const jogarBtn = document.getElementById("jogarBtn");
+
+        function gerarSimbolo() {
+            return simbolos[Math.floor(Math.random() * simbolos.length)];
+        }
+
+        function jogar() {
+            jogarBtn.disabled = true;
+            resultadoDiv.innerText = '';
+            
+            const escolha = apostaSelect.value;
+            let aposta = 0;
+
+            if (escolha === "tudo") {
+                aposta = saldo;
+            } else if (escolha === "metade") {
+                aposta = Math.floor(saldo / 2);
+            } else if (escolha === "fixo10") {
+                aposta = 10;
+            } else if (escolha === "fixo20") {
+                aposta = 20;
+            } else if (escolha === "fixo50") {
+                aposta = 50;
+            }
+
+            if (aposta <= 0 || aposta > saldo) {
+                resultadoDiv.innerText = "⚠️ Saldo insuficiente!";
+                jogarBtn.disabled = false;
+                return;
+            }
+
+            // Animação de rolagem
+            slots.forEach(slot => {
+                slot.classList.add('spinning');
+                setTimeout(() => {
+                    slot.classList.remove('spinning');
+                }, 3000); // Duração da animação
+            });
+
+            // Geração dos símbolos e atualização após a animação
+            setTimeout(() => {
+                const s1 = gerarSimbolo();
+                const s2 = gerarSimbolo();
+                const s3 = gerarSimbolo();
+
+                slots[0].innerText = s1;
+                slots[1].innerText = s2;
+                slots[2].innerText = s3;
+
+                let mensagem = '';
+                if (s1 === s2 && s2 === s3) {
+                    const ganho = aposta * 5;
+                    saldo += ganho;
+                    mensagem = `🎉 Parabéns! Você ganhou R$${ganho}!`;
+                } else {
+                    saldo -= aposta;
+                    mensagem = `😢 Você perdeu R$${aposta}.`;
+                }
+
+                document.getElementById("saldo").innerText = saldo;
+                resultadoDiv.innerText = mensagem;
+
+                if (saldo <= 0) {
+                    resultadoDiv.innerText = "💀 Fim de jogo! Saldo zerado.";
+                    jogarBtn.disabled = true;
+                } else {
+                    jogarBtn.disabled = false;
+                }
+            }, 3000); // 3 segundos para a animação terminar antes de mostrar o resultado
+        }
+    </script>
+</body>
+</html>
