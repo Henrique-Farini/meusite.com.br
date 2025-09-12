@@ -1,0 +1,34 @@
+{
+    "alunos": [
+        {
+            "tipo": "aluno",
+            "nome": "Henrique",
+            "email": "dalrefar@gmail.com",
+            "matricula": "1323"
+        },
+        {
+            "tipo": "aluno",
+            "nome": "Henrique",
+            "email": "dalrefar@gmail.com",
+            "matricula": ""
+        },
+        {
+            "tipo": "aluno",
+            "nome": "Henrique",
+            "email": "dalrefar@gmail.com",
+            "matricula": ""
+        }
+    ],
+    "professores": [
+        {
+            "nome": "Henrique",
+            "email": "dalrefar@gmail.com",
+            "disciplina": "matematica"
+        },
+        {
+            "nome": "Henrique",
+            "email": "dalrefar@gmail.com",
+            "disciplina": "matematica"
+        }
+    ]
+}

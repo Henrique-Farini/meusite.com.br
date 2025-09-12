@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e2e1e1;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #aeacae;
+            border-radius: 5px;
+            background-color: #adadad;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            border: 2px solid #000000;
+            padding: 5px;
+            border-radius: 3px;
+            width: calc(100% - 14px);
+            margin-bottom: 15px;
+        }
+
+        .cadastro {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .cadastro:hover {
+            background-color: #333333;
+        }
+
+        .campo-extra {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Usuário</h1>
+    <form action="salvar.php" method="post">
+        <label for="tipo">Tipo de Usuário:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="">Selecione</option>
+            <option value="professor">Professor</option>
+            <option value="aluno">Aluno</option>
+        </select>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Carlinhos Maia" name="nome" required>
+
+        <label for="email">Email:</label>
+        <input type="email" placeholder="carlinhosmaia@labubu.com" id="email" name="email" required>
+
+        <div id="campo_disciplina" class="campo-extra">
+            <label for="disciplina">Disciplina (para Professores):</label>
+            <input type="text" id="disciplina" name="disciplina">
+        </div>
+
+        <div id="campo_matricula" class="campo-extra">
+            <label for="matricula">Matrícula (para Alunos):</label>
+            <input type="text" id="matricula" name="matricula">
+        </div>
+
+        <button type="submit" class="cadastro">Salvar</button>
+    </form>
+
+    <script>
+        document.getElementById('tipo').addEventListener('change', function() {
+            var campoDisciplina = document.getElementById('campo_disciplina');
+            var campoMatricula = document.getElementById('campo_matricula');
+
+            if (this.value === 'professor') {
+                campoDisciplina.style.display = 'block';
+                campoMatricula.style.display = 'none';
+            } else if (this.value === 'aluno') {
+                campoDisciplina.style.display = 'none';
+                campoMatricula.style.display = 'block';
+            } else {
+                campoDisciplina.style.display = 'none';
+                campoMatricula.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

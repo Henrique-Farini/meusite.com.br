@@ -42,6 +42,14 @@
     }
 ?>
 
+
+<?php
+echo "<br>";
+echo count(file("dados.txt")) . " cadastros no total.";
+echo "<br>";
+?>
+
+
 <form method="post" style="margin-top:20px;">
     <input type="hidden" name="apagar" value="1">
     <button type="submit" 
@@ -57,6 +65,7 @@
         Novo Cadastro
     </button>
 </form>
+
 
 </header>
 </body>
