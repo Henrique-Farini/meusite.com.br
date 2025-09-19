@@ -61,6 +61,18 @@
         text-align: center;
         color: #333;
         text-decoration: none;
+         background-color: #3ca42cff;
+        color: white;
+        padding: 10px 20px;
+        border: none; 
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: sans-serif;
+        text-align: center;
+        text-decoration: none;
+       
+       
     }
 
 
@@ -69,11 +81,8 @@
 </head>
 <body>
     <form action="banco.json" method="post">
-        <button type="submit" class="dados">Ver Dados Salvos</button>
         <button type="button" class="cadastrar" onclick="window.location.href='cadastro.html'">Novo Cadastro</button>
-        <br><br>
-        
-        <a href="index.php" class="conteudo">Acessar meu conteudo</a>
+        <a href="index.php" class="conteudo">Ver Dados Salvos</a>
 
     </form>
     <?php 

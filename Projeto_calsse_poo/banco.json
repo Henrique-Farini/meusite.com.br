@@ -1,24 +1,4 @@
 {
-    "alunos": [
-        {
-            "tipo": "aluno",
-            "nome": "Henrique",
-            "email": "dalrefar@gmail.com",
-            "matricula": "1323"
-        },
-        {
-            "tipo": "aluno",
-            "nome": "Henrique",
-            "email": "dalrefar@gmail.com",
-            "matricula": ""
-        },
-        {
-            "tipo": "aluno",
-            "nome": "Henrique",
-            "email": "dalrefar@gmail.com",
-            "matricula": ""
-        }
-    ],
     "professores": [
         {
             "nome": "Henrique",
@@ -27,8 +7,28 @@
         },
         {
             "nome": "Henrique",
-            "email": "dalrefar@gmail.com",
-            "disciplina": "matematica"
+            "email": "asdad@gmail.com",
+            "disciplina": "Portugues"
+        }
+    ],
+    "alunos": [
+        {
+            "tipo": "aluno",
+            "nome": "aaaa",
+            "email": "afdxcdsc@gmail.com",
+            "matricula": "4325"
+        },
+        {
+            "tipo": "aluno",
+            "nome": "aaaa",
+            "email": "afdxcdsc@gmail.com",
+            "matricula": "4325"
+        },
+        {
+            "tipo": "aluno",
+            "nome": "aaaa",
+            "email": "afdxcdsc@gmail.com",
+            "matricula": "4325"
         }
     ]
 }
