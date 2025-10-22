@@ -59,7 +59,7 @@ if (!isset($_SESSION['premio']) || $_SESSION['premio'] === '') {
 </head>
 <body>
 <div class="container">
-    <h1>🎁 Sorteio da Rifa</h1>
+    <h1>  Sorteio da Rifa</h1>
     <p><strong>Data:</strong> <?php echo $data_hora; ?></p>
 
     <form method="post" class="form-premio">
@@ -107,7 +107,7 @@ if (isset($_POST['sortear'])) {
         $ganhadores[] = $novoGanhador;
         salvarGanhadores($arquivo_ganhadores, $ganhadores);
 
-        $_SESSION['msg'] = "🎉 Número sorteado: <strong>$numero</strong><br>🏆 Prêmio: <strong>$premio</strong>";
+        $_SESSION['msg'] = " Número sorteado: <strong>$numero</strong><br> Prêmio: <strong>$premio</strong>";
     } else {
         $_SESSION['msg'] = "Todos os números disponíveis já foram sorteados!";
     }
@@ -132,14 +132,34 @@ $numeros_sorteados = $_SESSION['numeros_sorteados'];
     <link rel="stylesheet" href="sorteio.css">
 </head>
 <body>
+
+<div class="promo-banner">
+    <div class="promo-left">
+        <h1>BET 22762</h1>
+        <p> ATÉ 300 MIL EM PREMIAÇÕES</p>
+        <form method="post">
+              <button type="submit" name="resetar">Novo Prêmio</button>
+        </form>
+    </div>
+     <div class="promo-right">
+        <img src="https://s2-oglobo.glbimg.com/xTN4D01fsAkdX_H9qTKPtjuMbu0=/0x0:1100x745/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2022/H/a/FSRleJQoONohfSGJFIxQ/bet-apostas.jpg" alt="Sorteio">
+    </div>
+</div>
+
+
+
+
+
+
+
 <div class="container">
-    <h1>🎲 Sorteio da Rifa</h1>
+    <h1> Sorteio da Rifa</h1>
     <p>Data e hora: <?php echo $data_hora; ?></p>
     <h2>Prêmio atual: <span><?php echo $premio; ?></span></h2>
 
     <form method="post">
         <button type="submit" name="sortear" <?php echo empty($numeros_disponiveis) ? 'disabled' : ''; ?>>Sortear Número</button>
-        <button type="submit" name="resetar">Novo Prêmio</button>
+      
     </form>
 
     <?php if (!empty($_SESSION['msg'])): ?>
@@ -158,7 +178,7 @@ $numeros_sorteados = $_SESSION['numeros_sorteados'];
     </div>
 
     <div class="coluna" style="margin-top:30px;">
-        <h3>🏅 Ganhadores anteriores</h3>
+        <h3></h3> Ganhadores anteriores</h3>
         <?php if (!empty($ganhadores)): ?>
             <?php foreach (array_reverse($ganhadores) as $g): ?>
                 <p><strong>Número:</strong> <?php echo $g['numero']; ?> — 
