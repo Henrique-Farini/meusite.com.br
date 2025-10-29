@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #ED5E03;
+    color: #FFFBDC;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    margin: 200px 0 0 0 ;
+    
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer p:last-child {
+    font-style: italic;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

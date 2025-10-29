@@ -1,0 +1,276 @@
+
+:root {
+  --verde: #228822;
+  --amarelo: #FFA500;
+  --laranja: #ED5E03;
+  --creme: #FFF8DC;
+  --texto: #333;
+  --fonte: "Poppins", sans-serif;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonte);
+  background-color: var(--creme);
+  color: var(--texto);
+
+}
+
+
+.titulo-pagina {
+  text-align: center;
+  font-size: 2.4rem;
+  color: var(--verde);
+  margin: 2rem 0 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.formulario-cardapio {
+  max-width: 900px;
+  background: #fff;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1.2s ease;
+}
+
+.campo-nome {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.campo-nome label {
+  font-weight: 600;
+  color: var(--laranja);
+  margin-bottom: 0.5rem;
+}
+
+.input-nome-cliente {
+  padding: 0.8rem;
+  border: 2px solid var(--verde);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-nome-cliente:focus {
+  border-color: var(--amarelo);
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
+}
+
+
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+
+.item-produto {
+  background-color: var(--creme);
+  border-left: 6px solid var(--verde);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.item-produto::before {
+
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(34,136,34,0.05), rgba(255,165,0,0.05));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.item-produto:hover::before {
+  opacity: 1;
+}
+
+.item-produto:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+
+.nome-produto {
+  color: var(--laranja);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.preco-produto {
+  color: var(--verde);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.label-quantidade {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.input-quantidade {
+  width: 70px;
+  padding: 0.3rem;
+  margin-left: 0.5rem;
+  border: 2px solid var(--amarelo);
+  border-radius: 6px;
+  
+}
+
+.input-quantidade:focus {
+  border-color: var(--laranja);
+  outline: none;
+  box-shadow: 0 0 6px rgba(237, 94, 3, 0.4);
+}
+.input-quantidade:hover {
+  border-color: red;
+  outline: none;
+  box-shadow: 0 0 6px rgba(237, 94, 3, 0.4);
+}
+
+
+.botao-fazer-pedido {
+  display: block;
+  width: 100%;
+  background: linear-gradient(90deg, var(--laranja), var(--amarelo));
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 12px rgba(237, 94, 3, 0.2);
+}
+
+.botao-fazer-pedido:hover {
+  transform: scale(1.03);
+  background: linear-gradient(90deg, var(--amarelo), var(--laranja));
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
+}
+
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+@media (max-width: 600px) {
+  .titulo-pagina {
+    font-size: 1.8rem;
+  }
+
+  .formulario-cardapio {
+    padding: 1.2rem;
+  }
+
+  .botao-fazer-pedido {
+    font-size: 1rem;
+  }
+}
+
+
+.input-quantidade {
+
+ pointer-events: auto !important; 
+}
+
+.formulario-cardapio textarea {
+   
+    padding: 0.8rem;
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    resize: vertical; 
+    width: 100%;
+    font-family: var(--fonte);
+}
+
+.formulario-cardapio textarea:focus {
+    border-color: var(--amarelo);
+    box-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
+}
+
+
+.container-imagem {
+    width: 100%;
+    
+    height: 150px; 
+    overflow: hidden; 
+    border-radius: 8px; 
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.imagem-produto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.4s ease;
+}
+
+
+.item-produto:hover .imagem-produto {
+    transform: scale(1.08); 
+}
+
+
+.item-produto {
+   
+    background-color: var(--creme);
+    border-left: 6px solid var(--verde);
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.formulario-cardapio textarea {
+    padding: 0.8rem;
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    resize: vertical; 
+    width: 100%;
+    font-family: var(--fonte);
+}
+
+.formulario-cardapio textarea:focus {
+    border-color: var(--amarelo);
+    box-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
+}

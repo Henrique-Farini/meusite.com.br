@@ -1,0 +1,56 @@
+.container-historico {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.item-historico {
+    background-color: #FFFBDC;
+    border-left: 6px solid #FFA500;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.item-historico:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.titulo-pedido-historico {
+    color: #228822;
+    margin-bottom: 0.5rem;
+}
+
+.data-pedido {
+    color: #ED5E03;
+    font-weight: normal;
+}
+
+.lista-itens-historico li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #FFA500;
+    padding: 0.3rem 0;
+}
+
+.valor-total-historico {
+    color: #ED5E03;
+    font-weight: bold;
+}
+
+.link-cardapio {
+    color: #228822;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-cardapio:hover {
+    color: #ED5E03;
+    text-decoration: underline;
+}
+

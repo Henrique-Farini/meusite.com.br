@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "cliente": "Grazi",
+        "data": "29\/10\/2025 17:49:19",
+        "itens": [
+            {
+                "quantidade": 1,
+                "produto": "Pastel De Pizza",
+                "subtotal": 13
+            },
+            {
+                "quantidade": 1,
+                "produto": "Pastel Carne",
+                "subtotal": 13
+            },
+            {
+                "quantidade": 1,
+                "produto": "Pastel 4 queijos",
+                "subtotal": 15
+            },
+            {
+                "quantidade": 1,
+                "produto": "Suco Laranja",
+                "subtotal": 8
+            }
+        ],
+        "total": 49,
+        "observacoes": "mais tudo"
+    }
+]

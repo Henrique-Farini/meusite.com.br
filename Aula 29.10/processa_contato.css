@@ -1,0 +1,29 @@
+        .status-container {
+            text-align: center;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .status-container h1 {
+            margin-bottom: 20px;
+        }
+        .status-container p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        .status-container a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--laranja);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .status-container a:hover {
+            background-color: var(--verde);
+        }

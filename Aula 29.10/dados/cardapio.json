@@ -1,0 +1,12 @@
+[
+{ "id": 1, "nome": "X-Bacon", "preco": 25.90, "categoria": "Lanches"   },
+{ "id": 2, "nome": "X-Tudo", "preco": 34.90, "categoria": "Lanches" },
+{ "id": 3, "nome": "Pastel De Pizza", "preco": 13.00, "categoria": "Pasteis" },
+{ "id": 4, "nome": "Pastel Carne", "preco": 13.00, "categoria": "Pasteis" },
+{ "id": 5, "nome": "Pastel 4 queijos", "preco": 15.00, "categoria": "Pasteis" },
+{ "id": 6, "nome": "Refrigerante", "preco": 6.00, "categoria": "Bebidas" },
+{ "id": 7, "nome": "Suco Laranja", "preco": 8.00, "categoria": "Bebidas" },
+{ "id": 8, "nome": "Cervejinha", "preco": 11.00, "categoria": "Bebidas" }
+
+
+]

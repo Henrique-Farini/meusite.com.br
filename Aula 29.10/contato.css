@@ -1,0 +1,171 @@
+:root {
+    --verde: #4CAF50;    
+    --amarelo: #FFEB3B;  
+    --laranja: #FF9800;  
+    --cinza-fundo: #f8f8f8;
+    --texto-escuro: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--cinza-fundo);
+    color: var(--texto-escuro);
+}
+
+
+.contato-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.contato-container h1 {
+    color: var(--verde);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.introducao {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.contato-principal {
+    display: flex;
+    gap: 30px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.formulario-contato, .info-contato {
+    flex: 1;
+}
+
+.info-contato {
+    border-left: 1px solid #eee;
+    padding-left: 30px;
+}
+
+/* Formulário */
+.formulario-contato h2 {
+    color: var(--laranja);
+    border-bottom: 2px solid var(--amarelo);
+    padding-bottom: 10px;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--texto-escuro);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    transition: border-color 0.3s;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: var(--verde);
+    outline: none;
+}
+
+.botao-enviar {
+    display: block;
+    width: 100%;
+    background-color: var(--verde);
+    color: #fff;
+    padding: 12px 20px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.botao-enviar:hover {
+    background-color: var(--laranja);
+}
+
+
+.info-contato h2 {
+    color: var(--laranja);
+}
+
+.info-item {
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border-left: 3px solid var(--amarelo);
+}
+
+.info-item h3 {
+    color: var(--verde);
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+.info-item a {
+    color: var(--laranja);
+    text-decoration: none;
+}
+
+.info-item a:hover {
+    text-decoration: underline;
+}
+
+
+.localizacao {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.localizacao h2 {
+    color: var(--laranja);
+    margin-bottom: 15px;
+}
+
+.mapa {
+    
+    height: 300px;
+  
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #666;
+}
+
+
+
+@media (max-width: 768px) {
+    .contato-principal {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .info-contato {
+        border-left: none;
+        border-top: 1px solid #eee;
+        padding: 20px 0 0 0;
+        margin-top: 20px;
+    }
+} 
